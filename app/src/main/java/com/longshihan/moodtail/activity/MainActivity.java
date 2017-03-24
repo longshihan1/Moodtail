@@ -1,31 +1,53 @@
 package com.longshihan.moodtail.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
-
+import com.longshihan.commonlibrary.base.BaseActivityPresenter;
 import com.longshihan.moodtail.R;
+import com.longshihan.moodtail.contract.GoodsDetailContract;
+import com.longshihan.moodtail.model.bean.TestModel;
+import com.longshihan.moodtail.persenter.GoodsDetailPersenter;
 
-public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
+public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View,
+        GoodsDetailPersenter> implements GoodsDetailContract.View {
+    private GoodsDetailPersenter mGoodsDetailPersenter;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initAllMembersView(Bundle savedInstanceState) {
 
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+    @Override
+    protected GoodsDetailPersenter createPresenter() {
+        if (mGoodsDetailPersenter==null){
+            mGoodsDetailPersenter=new GoodsDetailPersenter(mContext);
+        }
+        return mGoodsDetailPersenter;
+    }
+
+    @Override
+    protected void initData() {
+        mGoodsDetailPersenter.fetch();
+    }
+
+
+    @Override
+    public void showError(int type, String msg) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void showData(TestModel mtopBean) {
+
+    }
 }

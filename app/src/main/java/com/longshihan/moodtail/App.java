@@ -7,15 +7,16 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.longshihan.commonlibrary.utils.CrashHandler;
 import com.longshihan.moodtail.app.AppComponent;
 import com.longshihan.moodtail.app.AppModule;
 import com.longshihan.moodtail.app.DaggerAppComponent;
-import com.longshihan.moodtail.util.CrashHandler;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
-import java.util.HashSet;
 import java.util.Set;
+
+import io.realm.Realm;
 
 /**
  * @author longshihan
@@ -55,33 +56,11 @@ public class App extends Application {
 
         //初始化内存泄漏检测
         LeakCanary.install(this);
+        Realm.init(this);
+
 
     }
 
-    public void addAcitivity(Activity act) {
-        if (allActivities == null) {
-            allActivities = new HashSet<Activity>();
-        }
-        allActivities.add(act);
-    }
-
-    public void removeActivity(Activity act) {
-        if (allActivities != null) {
-            allActivities.remove(act);
-        }
-    }
-
-    public void exitApp() {
-        if (allActivities != null) {
-            synchronized (allActivities) {
-                for (Activity act : allActivities) {
-                    act.finish();
-                }
-            }
-        }
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
-    }
 
     public void getScreenSize() {
         WindowManager windowManager = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);

@@ -1,10 +1,8 @@
-package com.longshihan.moodtail.util;
+package com.longshihan.commonlibrary.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-
-import com.longshihan.moodtail.App;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -37,13 +35,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
         System.out.println(ex.toString());
-        LogInfo.e(TAG, ex.toString());
-        LogInfo.e(TAG, collectCrashDeviceInfo());
-        LogInfo.e(TAG, getCrashInfo(ex));
+        Log.e(TAG, ex.toString());
+        Log.e(TAG, collectCrashDeviceInfo());
+        Log.e(TAG, getCrashInfo(ex));
         // 调用系统错误机制
         defaultHandler.uncaughtException(thread, ex);
         ToastInfo.showShortToast(context,"抱歉,程序发生异常即将退出");
-        App.getInstance().exitApp();
+        AppManager.getAppManager().finishActivity();
     }
 
     /**

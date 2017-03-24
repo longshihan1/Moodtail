@@ -1,4 +1,4 @@
-package com.longshihan.moodtail.util;
+package com.longshihan.commonlibrary.utils;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -10,9 +10,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
-
-import com.longshihan.moodtail.App;
-import com.longshihan.moodtail.app.Constants;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,8 +24,8 @@ public class SystemInfo {
     /**
      * 检查WIFI是否连接
      */
-    public static boolean isWifiConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) App.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isWifiConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo wifiInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         return wifiInfo != null;
@@ -36,8 +33,8 @@ public class SystemInfo {
     /**
      * 检查手机网络(4G/3G/2G)是否连接
      */
-    public static boolean isMobileNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) App.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isMobileNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mobileNetworkInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return mobileNetworkInfo != null;
@@ -45,8 +42,8 @@ public class SystemInfo {
     /**
      * 检查是否有可用网络
      */
-    public static boolean isNetworkConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) App.getInstance().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         return connectivityManager.getActiveNetworkInfo() != null;
     }
 
@@ -70,7 +67,7 @@ public class SystemInfo {
      */
     public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, View container, boolean isShare){
         String fileName = url.substring(url.lastIndexOf("/"),url.lastIndexOf(".")) + ".png";
-        File fileDir = new File(Constants.PATH_DATA);
+        File fileDir = new File(context.getCacheDir().getAbsolutePath() + File.separator + "data");
         if (!fileDir.exists()){
             fileDir.mkdir();
         }

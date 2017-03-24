@@ -1,8 +1,6 @@
 package com.longshihan.moodtail.util.db;
 
 
-import android.content.Context;
-
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -15,8 +13,8 @@ import io.realm.RealmConfiguration;
 public class RealmHelper {
     private Realm mRealm;
 
-    public RealmHelper(Context context) {
-        mRealm = Realm.getInstance(new RealmConfiguration.Builder(context)
+    public RealmHelper() {
+        mRealm = Realm.getInstance(new RealmConfiguration.Builder()
                 .name("myOtherRealm.realm")
                 .build());
 
