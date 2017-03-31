@@ -2,6 +2,7 @@ package com.longshihan.moodtail.manager.http;
 
 import android.widget.Toast;
 
+import com.longshihan.commonlibrary.http.ApnsNetworkInterceptor;
 import com.longshihan.commonlibrary.http.CookiesManager;
 import com.longshihan.moodtail.App;
 
@@ -49,7 +50,7 @@ public class OkHttp3Utils {
                     //添加拦截器
                     .addInterceptor(new MyIntercepter())
                     //添加网络连接器
-                    .addNetworkInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+                    .addNetworkInterceptor(new ApnsNetworkInterceptor())
                     //设置请求读写的超时时间
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)

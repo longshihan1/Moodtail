@@ -4,6 +4,8 @@ import com.longshihan.commonlibrary.utils.ZRx;
 import com.longshihan.moodtail.manager.http.RetrofitUtils;
 import com.longshihan.moodtail.model.bean.HttpResult;
 
+import java.util.concurrent.TimeUnit;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -37,6 +39,7 @@ public class HttpServiceMethod extends RetrofitUtils {
      */
     public static Subscription getTestString(Subscriber subscriber, Class mclass) {
         Observable obsevable = jokeservice.getStatus()
+                .debounce(400, TimeUnit.MILLISECONDS)
                 .compose(ZRx.<HttpResult>rxSchedulerHelper());
         return obsevable.subscribe(subscriber);
     }
