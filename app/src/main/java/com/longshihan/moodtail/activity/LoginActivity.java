@@ -2,8 +2,8 @@ package com.longshihan.moodtail.activity;
 
 import android.os.Bundle;
 
-import com.longshihan.commonlibrary.base.BaseActivityPresenter;
 import com.longshihan.moodtail.R;
+import com.longshihan.moodtail.base.BaseActivityPresenter;
 import com.longshihan.moodtail.contract.LoginContract;
 import com.longshihan.moodtail.model.bean.TestModel;
 import com.longshihan.moodtail.persenter.LoginPersenter;

@@ -7,7 +7,8 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.longshihan.commonlibrary.utils.CrashHandler;
+import com.longshihan.commonlibrary.CApplication;
+import com.longshihan.commonlibrary.utils.Error.LocalFileHandler;
 import com.longshihan.moodtail.app.AppComponent;
 import com.longshihan.moodtail.app.AppModule;
 import com.longshihan.moodtail.app.DaggerAppComponent;
@@ -25,13 +26,13 @@ import io.realm.Realm;
  */
 
 public class App extends Application {
-    private static App           instance;
+    private static App instance;
     private Set<Activity> allActivities;
 
-    public static int   SCREEN_WIDTH  = -1;
-    public static int   SCREEN_HEIGHT = -1;
-    public static float DIMEN_RATE    = -1.0F;
-    public static int   DIMEN_DPI     = -1;
+    public static int SCREEN_WIDTH = -1;
+    public static int SCREEN_HEIGHT = -1;
+    public static float DIMEN_RATE = -1.0F;
+    public static int DIMEN_DPI = -1;
 
     public static synchronized App getInstance() {
         return instance;
@@ -47,9 +48,9 @@ public class App extends Application {
 
         //初始化日志
         Logger.init(getPackageName()).hideThreadInfo();
-
+        CApplication.init(this);
         //初始化错误收集
-        CrashHandler.init(new CrashHandler(getApplicationContext()));
+        Thread.setDefaultUncaughtExceptionHandler(new LocalFileHandler(this));
 
         //初始化过度绘制检测
         //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
@@ -78,7 +79,7 @@ public class App extends Application {
         }
     }
 
-    public static AppComponent getAppComponent(){
+    public static AppComponent getAppComponent() {
         return DaggerAppComponent.builder()
                 .appModule(new AppModule(instance))
                 .build();

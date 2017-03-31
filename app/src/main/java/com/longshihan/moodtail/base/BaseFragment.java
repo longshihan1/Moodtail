@@ -1,4 +1,4 @@
-package com.longshihan.commonlibrary.base;
+package com.longshihan.moodtail.base;
 
 import android.app.Activity;
 import android.os.Bundle;

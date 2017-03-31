@@ -1,7 +1,5 @@
 package com.longshihan.moodtail.persenter;
 
-import android.content.Context;
-
 import com.longshihan.commonlibrary.base.BasePresenter;
 import com.longshihan.commonlibrary.listener.OnLoadDataListener;
 import com.longshihan.moodtail.contract.LoginContract;

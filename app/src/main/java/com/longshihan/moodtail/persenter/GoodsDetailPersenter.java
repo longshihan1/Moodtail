@@ -26,7 +26,7 @@ public class GoodsDetailPersenter extends BasePresenter<GoodsDetailContract.View
 
     public GoodsDetailPersenter(Context context) {
         mContext = context;
-        mIModel = new IGoodsDetailImpl(context);
+        mIModel = new IGoodsDetailImpl();
     }
 
     //第一次绑定数据

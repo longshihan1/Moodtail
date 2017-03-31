@@ -3,7 +3,6 @@ package com.longshihan.moodtail.app;
 import com.longshihan.moodtail.App;
 import com.longshihan.moodtail.listener.ContextLife;
 import com.longshihan.moodtail.util.db.RealmHelper;
-import com.longshihan.moodtail.util.http.RetrofitHelper;
 
 import javax.inject.Singleton;
 
@@ -30,16 +29,12 @@ public class AppModule {
         return mApp;
     }
 
-    @Provides
-    @Singleton
-    RetrofitHelper provideRetrofitHelper() {
-        return new RetrofitHelper();
-    }
+
 
     @Provides
     @Singleton
     RealmHelper provideRealmHelper() {
-        return new RealmHelper(mApp);
+        return new RealmHelper();
     }
 
 }

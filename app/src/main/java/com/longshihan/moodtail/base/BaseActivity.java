@@ -1,4 +1,4 @@
-package com.longshihan.commonlibrary.base;
+package com.longshihan.moodtail.base;
 
 import android.annotation.TargetApi;
 import android.content.res.Configuration;

@@ -1,12 +1,15 @@
-package com.longshihan.commonlibrary.base;
+package com.longshihan.moodtail.base;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+
+import com.longshihan.commonlibrary.base.BasePresenter;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -14,13 +17,9 @@ import butterknife.Unbinder;
 /**
  * @author Administrator
  * @time 2016/10/28 16:05
- * @des ${TODO}
- * @updateAuthor $Author$
- * @updateDate $Date$
- * @updateDes ${TODO}
+ * dialogfragment
  */
-public abstract class BaseFragmentPresenter<V, T extends BasePresenter<V>> extends Fragment {
-    protected View mRootView;
+public abstract class BaseDialogFragmentPresenter<V, T extends BasePresenter<V>> extends DialogFragment {
     public T mPresenter;
     private Unbinder unbinder;
 
@@ -32,21 +31,21 @@ public abstract class BaseFragmentPresenter<V, T extends BasePresenter<V>> exten
         mContext = context;
     }
 
-    @Nullable
+    @NonNull
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
-        mRootView = inflater.inflate(getLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, mRootView);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setCancelable(false);
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View view = inflater.inflate(getLayoutId(), null);
+        unbinder = ButterKnife.bind(this, view);
+        builder.setView(view);
         //创建presenter
         mPresenter = createPresenter();
-        //内存泄漏
         //关联view
         mPresenter.attachView((V) this);
-        initAllMembersView(savedInstanceState);
         initData();
-        return mRootView;
-
+        return builder.create();
     }
 
     /**
@@ -55,13 +54,6 @@ public abstract class BaseFragmentPresenter<V, T extends BasePresenter<V>> exten
      * @return
      */
     public abstract int getLayoutId();
-
-    /**
-     * 界面起点
-     *
-     * @param savedInstanceState
-     */
-    protected abstract void initAllMembersView(Bundle savedInstanceState);
 
     /**
      * 创建presenter
