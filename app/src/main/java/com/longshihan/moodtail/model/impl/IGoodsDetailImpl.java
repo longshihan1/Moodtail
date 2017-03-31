@@ -1,7 +1,5 @@
 package com.longshihan.moodtail.model.impl;
 
-import android.content.Context;
-
 import com.longshihan.commonlibrary.listener.OnLoadDataListener;
 import com.longshihan.moodtail.manager.HttpServiceMethod;
 import com.longshihan.moodtail.model.bean.TestModel;
@@ -17,11 +15,9 @@ import rx.Subscription;
  */
 
 public class IGoodsDetailImpl implements IGoodsDetail {
-    private Context mContext;
     private Subscriber<TestModel> subscriber;
 
-    public IGoodsDetailImpl(Context context) {
-        mContext = context;
+    public IGoodsDetailImpl() {
     }
     /**
      * 默认加载的数据
