@@ -41,6 +41,15 @@ public class HttpServiceMethod extends RetrofitUtils {
         return obsevable.subscribe(subscriber);
     }
 
+    /**
+     * @param subscriber 由调用者传过来的观察者对象
+     */
+    public static Subscription getlogin(Subscriber subscriber) {
+        Observable obsevable = jokeservice.getStatus()
+                .compose(ZRx.<HttpResult>rxSchedulerHelper());
+        return obsevable.subscribe(subscriber);
+    }
+
     public static Observable<HttpResult> getTestString() {
         return jokeservice.getStatus();
     }

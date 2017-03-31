@@ -22,4 +22,7 @@ public interface HttpApi {
 
     @POST("msg.status")
     Observable<HttpResult> getStatus();
+
+
+
 }
