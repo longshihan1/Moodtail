@@ -1,9 +1,13 @@
 package com.longshihan.moodtail.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.longshihan.commonlibrary.widget.recycler.LFRecyclerView;
+import com.longshihan.commonlibrary.widget.recycler.OnItemClickListener;
 import com.longshihan.moodtail.R;
 import com.longshihan.moodtail.adapter.TestAdapter;
 import com.longshihan.moodtail.base.BaseActivityPresenter;
@@ -19,16 +23,18 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View,
-        GoodsDetailPersenter> implements GoodsDetailContract.View {
+        GoodsDetailPersenter> implements GoodsDetailContract.View ,OnItemClickListener, LFRecyclerView.LFRecyclerViewListener, LFRecyclerView.LFRecyclerViewScrollChange {
 
 
     @BindView(R.id.mainrecy)
-    RecyclerView mMainrecy;
+    LFRecyclerView mMainrecy;
 
     private GoodsDetailPersenter mGoodsDetailPersenter;
     LinearLayoutManager listlinearLayoutManager;
     private TestAdapter mTestAdapter;
     private List<String> mStringList;
+    private boolean b;
+
 
 
     @Override
@@ -55,10 +61,18 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
         for (int i = 0; i < 20; i++) {
             mStringList.add("long" + i);
         }
-        listlinearLayoutManager = new LinearLayoutManager(mContext);
+     /*   listlinearLayoutManager = new LinearLayoutManager(mContext);
         listlinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//垂直方向
-        mMainrecy.setLayoutManager(listlinearLayoutManager);
+        mMainrecy.setLayoutManager(listlinearLayoutManager);*/
         mTestAdapter = new TestAdapter(mContext, mStringList);
+        mMainrecy.setLoadMore(true);
+        mMainrecy.setRefresh(true);
+        mMainrecy.setNoDateShow();
+        mMainrecy.setAutoLoadMore(true);
+        mMainrecy.setOnItemClickListener(this);
+        mMainrecy.setLFRecyclerViewListener(this);
+        mMainrecy.setScrollChangeListener(this);
+        mMainrecy.setItemAnimator(new DefaultItemAnimator());
         mMainrecy.setAdapter(mTestAdapter);
         //mGoodsDetailPersenter.fetch();
     }
@@ -84,5 +98,57 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    @Override
+    public void onClick(int position) {
+
+    }
+
+    @Override
+    public void onLongClick(int po) {
+
+    }
+
+    @Override
+    public void onRecyclerViewScrollChange(View view, int i, int i1) {
+
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b = !b;
+                mMainrecy.stopRefresh(b);
+                mStringList=new ArrayList<String>();
+                for (int i = 0; i < 20; i++) {
+                    mStringList.add("long" + i);
+                }
+                mTestAdapter.appendList(mStringList);
+              /*  mTestAdapter.notifyItemInserted(0);
+                mTestAdapter.notifyItemRangeChanged(0,mStringList.size());*/
+
+            }
+        }, 2000);
+    }
+
+    @Override
+    public void onLoadMore() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mMainrecy.stopLoadMore();
+                mStringList=new ArrayList<String>();
+                for (int i = 20; i < 40; i++) {
+                    mStringList.add("long" + i);
+                }
+                mTestAdapter.addList(mStringList);
+                //                list.add(list.size(), "leefeng.me" + "==onLoadMore");
+                //mTestAdapter.notifyItemRangeInserted(mStringList.size()-1,1);
+
+            }
+        }, 2000);
     }
 }

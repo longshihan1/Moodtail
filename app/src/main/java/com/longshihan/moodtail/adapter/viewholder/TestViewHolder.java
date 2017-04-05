@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.longshihan.commonlibrary.base.BaseRecyViewHolder;
 import com.longshihan.moodtail.R;
 
 /**

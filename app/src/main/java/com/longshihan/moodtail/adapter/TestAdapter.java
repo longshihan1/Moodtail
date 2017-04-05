@@ -28,6 +28,15 @@ public class TestAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.mLayoutInflater = LayoutInflater.from(context);
     }
 
+    public void addList(List<String> goodsSortInfos){
+        mList.addAll(goodsSortInfos);
+        notifyDataSetChanged();
+    }
+    public void appendList(List<String> goodsSortInfos){
+        mList=goodsSortInfos;
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_test, parent, false);
