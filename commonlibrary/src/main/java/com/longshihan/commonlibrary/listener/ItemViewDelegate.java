@@ -4,10 +4,9 @@ package com.longshihan.commonlibrary.listener;
 import com.longshihan.commonlibrary.base.ViewHolder;
 
 /**
- * Created by zhy on 16/6/22.
+ * 多种item的接口
  */
-public interface ItemViewDelegate<T>
-{
+public interface ItemViewDelegate<T> {
 
     int getItemViewLayoutId();
 
