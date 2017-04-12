@@ -8,4 +8,10 @@
     <color name="vpi__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
     <color name="vpi__bright_foreground_inverse_holo_dark">@color/vpi__bright_foreground_holo_light</color>
     <color name="vpi__bright_foreground_inverse_holo_light">@color/vpi__bright_foreground_holo_dark</color>
+
+   <color name="pageBackground">#F2F4F7</color>
+   <color name="text_color_theme">#2095FF</color>
+   <color name="text_color_main">#000000</color>
+   <color name="text_color_child">#6A6A6A</color>
+   <color name="text_color_small_child">#C1C1C1</color>
 </resources>
