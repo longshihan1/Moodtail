@@ -32,6 +32,8 @@
         <item name="android:layout_marginLeft">6dp</item>
         <item name="android:layout_marginRight">6dp</item>
     </style>
-
+    <style name="style_progressbar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/progressbar</item>
+    </style>
 
 </resources>

@@ -71,6 +71,7 @@ public abstract class BaseActivityPresenter<V, T extends BasePresenter<V>> exten
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         //解除关联
         mPresenter.detachView();
         //解除注解
