@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
         mMainrecy.setScrollChangeListener(this);
         mMainrecy.setItemAnimator(new DefaultItemAnimator());
         mMainrecy.setAdapter(mTestAdapter);
+
         //mGoodsDetailPersenter.fetch();
         loadDataLayout.setOnReloadListener(new LoadDataLayout.OnReloadListener() {
             @Override

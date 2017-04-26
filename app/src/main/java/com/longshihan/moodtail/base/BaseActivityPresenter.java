@@ -1,11 +1,13 @@
 package com.longshihan.moodtail.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.longshihan.commonlibrary.base.BasePresenter;
+import com.longshihan.commonlibrary.proxy.HookViewManager;
 import com.longshihan.commonlibrary.utils.AppManager;
 
 import butterknife.ButterKnife;
@@ -23,6 +25,10 @@ public abstract class BaseActivityPresenter<V, T extends BasePresenter<V>> exten
     public T mPresenter;
     private Unbinder unbinder;
     public Context mContext;
+    /**
+     * 首次执行会hook监听器
+     */
+    private boolean isHookListener = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +45,20 @@ public abstract class BaseActivityPresenter<V, T extends BasePresenter<V>> exten
         initAllMembersView(savedInstanceState);
         initData();
     }
-
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (isHookListener) {//防止退出的时候还hook
+            return;
+        }
+        getWindow().getDecorView().post(new Runnable() {
+            @Override
+            public void run() {//等待view都执行完毕之后再hook,否则onLayoutChange执行多次就会hook多次
+                HookViewManager.getInstance().hookStart((Activity) mContext);
+                isHookListener = true;
+            }
+        });
+    }
 
     /**
      * 创建视图布局

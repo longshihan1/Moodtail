@@ -65,7 +65,7 @@ public class BezierRoundView extends View implements ViewPager.OnPageChangeListe
             } else if (attr == R.styleable.BezierRoundView_round_count) {
                 default_round_count = array.getInteger(i, default_round_count);
 
-            } else if (attr == R.styleable.BezierRoundView_radius) {
+            } else if (attr == R.styleable.BezierRoundView_round_radius) {
                 mRadius = array.getDimensionPixelSize(attr, mRadius);
 
             }

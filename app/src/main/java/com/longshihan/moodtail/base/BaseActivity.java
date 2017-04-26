@@ -27,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public TextView mTitle;
     private Unbinder unbinder;
 
+
     public abstract int getContentViewId();
 
     protected void onResume() {
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
     }
+
 
 
     @Override
