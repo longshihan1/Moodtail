@@ -1,5 +1,6 @@
 package com.longshihan.moodtail.manager;
 
+import com.longshihan.commonlibrary.http.RetryWithDelay;
 import com.longshihan.commonlibrary.utils.ZRx;
 import com.longshihan.moodtail.manager.http.RetrofitUtils;
 import com.longshihan.moodtail.model.bean.HttpResult;
@@ -40,6 +41,8 @@ public class HttpServiceMethod extends RetrofitUtils {
     public static Subscription getTestString(Subscriber subscriber, Class mclass) {
         Observable obsevable = jokeservice.getStatus()
                 .debounce(400, TimeUnit.MILLISECONDS)
+                //总共重试3次，重试间隔3000毫秒
+                .retryWhen(new RetryWithDelay(3, 3000))
                 .compose(ZRx.<HttpResult>rxSchedulerHelper());
         return obsevable.subscribe(subscriber);
     }
