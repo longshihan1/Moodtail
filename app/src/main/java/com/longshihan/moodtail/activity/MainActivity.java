@@ -1,13 +1,16 @@
 package com.longshihan.moodtail.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.longshihan.commonlibrary.utils.premission.Permission;
 import com.longshihan.commonlibrary.widget.errlayout.LoadDataLayout;
 import com.longshihan.commonlibrary.widget.recycler.LFRecyclerView;
 import com.longshihan.commonlibrary.widget.recycler.OnItemClickListener;
@@ -22,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import rx.functions.Action1;
 
 
 public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View,
@@ -40,7 +45,6 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
     private List<String> mStringList;
     private boolean b;
     private Handler mHandler;
-
 
     @Override
     public int getLayoutId() {
@@ -87,7 +91,10 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
         });
         loadDataLayout.setStatus(LoadDataLayout.LOADING);
         initHandler();
+
+
     }
+
 
     private void initHandler() {
         if (mHandler == null) {
@@ -202,5 +209,43 @@ public class MainActivity extends BaseActivityPresenter<GoodsDetailContract.View
             mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
         }
+    }
+
+
+    @OnClick(R.id.enableCamera)
+    public void onViewClicked() {
+        //多个权限
+        //这个请求事件我写在点击事件里面，
+        //点击button之后RxPermissions会为我们申请运行时权限
+        rxPermissions
+                .requestEach(Manifest.permission.CAMERA,
+                        Manifest.permission.READ_PHONE_STATE)
+                .subscribe(new Action1<Permission>() {
+                    @Override
+                    public void call(Permission permission) {
+                        if (permission.granted) {
+                            Log.i("permissions", Manifest.permission.READ_CALENDAR + "：获取成功");
+                        } else {
+                            Log.i("permissions", Manifest.permission.READ_CALENDAR + "：获取失败");
+                        }
+                    }
+                });
+               /* .subscribe((Permission permission) -> { // will emit 2 Permission objects
+                    if (permission.granted) {
+                        // `permission.name` is granted !
+                    }
+                });*/
+        //单个权限
+           /*     .request(Manifest.permission.CAMERA)//这里填写所需要的权限
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        if (aBoolean) {//true表示获取权限成功（注意这里在android6.0以下默认为true）
+                            Log.i("permissions", Manifest.permission.READ_CALENDAR + "：获取成功");
+                        } else {
+                            Log.i("permissions", Manifest.permission.READ_CALENDAR + "：获取失败");
+                        }
+                    }
+                });*/
     }
 }

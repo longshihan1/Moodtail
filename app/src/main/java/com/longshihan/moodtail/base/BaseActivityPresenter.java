@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.longshihan.commonlibrary.base.BasePresenter;
 import com.longshihan.commonlibrary.proxy.HookViewManager;
 import com.longshihan.commonlibrary.utils.AppManager;
+import com.longshihan.commonlibrary.utils.premission.RxPermissions;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -25,6 +26,7 @@ public abstract class BaseActivityPresenter<V, T extends BasePresenter<V>> exten
     public T mPresenter;
     private Unbinder unbinder;
     public Context mContext;
+   public RxPermissions rxPermissions;
     /**
      * 首次执行会hook监听器
      */
@@ -33,6 +35,9 @@ public abstract class BaseActivityPresenter<V, T extends BasePresenter<V>> exten
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+         rxPermissions = new RxPermissions(this);
+        rxPermissions.setLogging(true);
+
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
         mContext=this;
