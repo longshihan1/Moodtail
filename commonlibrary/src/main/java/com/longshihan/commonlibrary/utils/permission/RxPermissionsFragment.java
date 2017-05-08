@@ -1,4 +1,4 @@
-package com.longshihan.commonlibrary.utils.premission;
+package com.longshihan.commonlibrary.utils.permission;
 
 import android.annotation.TargetApi;
 import android.app.Fragment;

@@ -1,4 +1,4 @@
-package com.longshihan.commonlibrary.utils.premission;
+package com.longshihan.commonlibrary.utils.permission;
 
 public class Permission {
     public final String name;

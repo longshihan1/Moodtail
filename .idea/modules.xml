@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Moodtail1.iml" filepath="$PROJECT_DIR$/Moodtail1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Moodtail.iml" filepath="$PROJECT_DIR$/Moodtail.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonlibrary/commonlibrary.iml" filepath="$PROJECT_DIR$/commonlibrary/commonlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sharemodule/sharemodule.iml" filepath="$PROJECT_DIR$/sharemodule/sharemodule.iml" />
     </modules>
   </component>
 </project>

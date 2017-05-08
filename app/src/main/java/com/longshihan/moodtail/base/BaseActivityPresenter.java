@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.longshihan.commonlibrary.base.BasePresenter;
 import com.longshihan.commonlibrary.proxy.HookViewManager;
 import com.longshihan.commonlibrary.utils.AppManager;
-import com.longshihan.commonlibrary.utils.premission.RxPermissions;
+import com.longshihan.commonlibrary.utils.permission.RxPermissions;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

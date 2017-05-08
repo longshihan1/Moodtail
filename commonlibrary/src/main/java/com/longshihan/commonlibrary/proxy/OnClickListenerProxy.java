@@ -18,6 +18,7 @@ public class OnClickListenerProxy implements View.OnClickListener {
     private int MIN_CLICK_DELAY_TIME = 1000;
     private long lastClickTime = 0;
 
+
     private OnListenerProxyCallBack.OnClickProxyListener onClickProxyListener;
 
     public OnClickListenerProxy(View.OnClickListener onClickListener, OnListenerProxyCallBack
@@ -27,7 +28,7 @@ public class OnClickListenerProxy implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
         long currentTime = Calendar.getInstance().getTimeInMillis();
         System.out.println("--------------" + (currentTime - lastClickTime) + "--------------");
         if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {

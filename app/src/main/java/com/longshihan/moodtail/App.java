@@ -12,6 +12,7 @@ import com.longshihan.commonlibrary.utils.Error.LocalFileHandler;
 import com.longshihan.moodtail.app.AppComponent;
 import com.longshihan.moodtail.app.AppModule;
 import com.longshihan.moodtail.app.DaggerAppComponent;
+import com.longshihan.sharemodule.ShapeApp;
 import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -49,6 +50,7 @@ public class App extends Application {
         //初始化日志
         Logger.init(getPackageName()).hideThreadInfo();
         CApplication.init(this);
+        ShapeApp.init(this);
         //初始化错误收集
         Thread.setDefaultUncaughtExceptionHandler(new LocalFileHandler(this));
 

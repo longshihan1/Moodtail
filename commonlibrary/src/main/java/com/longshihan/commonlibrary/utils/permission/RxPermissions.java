@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-package com.longshihan.commonlibrary.utils.premission;
+package com.longshihan.commonlibrary.utils.permission;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -28,6 +28,9 @@ import rx.Observable;
 import rx.functions.Func1;
 import rx.subjects.PublishSubject;
 
+/**
+ * 在activity的新建一个fragment，在这个fragment里面进行操作
+ */
 public class RxPermissions {
 
     static final String TAG = "RxPermissions";
