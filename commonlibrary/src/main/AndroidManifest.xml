@@ -9,7 +9,9 @@
         <meta-data
             android:name="com.longshihan.commonlibrary.utils.GlideX.MyGlideModule"
             android:value="GlideModule"/>
-
+        <meta-data
+            android:name="com.bumptech.glide.integration.okhttp.OkHttpGlideModule"
+            android:value="GlideModule" />
         <service
             android:name=".server.DownloadService"
             android:enabled="true"

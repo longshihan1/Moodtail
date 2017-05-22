@@ -15,6 +15,9 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -94,6 +97,19 @@ public class LocalFileHandler extends BaseExceptionHandler {
             if (!errorFile.exists()) {
                 errorFile.createNewFile();
             }
+
+
+
+
+            FileOutputStream fos = new FileOutputStream(errorFile);
+            FileChannel fcout = fos.getChannel();
+            String errStr="\n\n-----错误分割线:手机信息：" + stringBuffer + dateFormat.format(new Date()) +
+                    "-----\n\n";
+            ByteBuffer src = Charset.forName("utf8").encode(errStr);
+            // 字节缓冲的容量和limit会随着数据长度变化，不是固定不变的
+
+
+
 
             OutputStream out = new FileOutputStream(errorFile, true);
             out.write(("\n\n-----错误分割线:手机信息：" + stringBuffer + dateFormat.format(new Date()) +
